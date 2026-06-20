@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import { useStore } from '@/store/useStore';
 import { getAnimeList } from '@/lib/api';
 import AnimeGrid from '@/components/AnimeGrid';
+import Select from '@/components/Select';
 
 // Library page: real Supabase data, responsive grid, search + genre/status filter.
 const GENRES = ['Action', 'Fantasy', 'Adventure', 'Supernatural', 'Martial Arts', 'Drama'];
@@ -39,8 +40,6 @@ export default function Browse() {
       .finally(() => setLoading(false));
   }, [debounced, genre, status]);
 
-  const selectClass = 'rounded-lg bg-black/30 px-3 py-2 text-sm text-white ring-1 ring-white/10 outline-none focus:ring-primary';
-
   return (
     <main className="mx-auto max-w-6xl px-4 pb-16 pt-28">
       <h1 className="mb-6 font-heading text-3xl text-white">Browse</h1>
@@ -51,14 +50,20 @@ export default function Browse() {
           onChange={(e) => setSearch(e.target.value)}
           className="flex-1 rounded-lg bg-black/30 px-4 py-2 text-white ring-1 ring-white/10 outline-none focus:ring-primary"
         />
-        <select value={genre} onChange={(e) => setGenre(e.target.value)} className={selectClass}>
-          <option value="">All genres</option>
-          {GENRES.map((g) => <option key={g} value={g}>{g}</option>)}
-        </select>
-        <select value={status} onChange={(e) => setStatus(e.target.value)} className={selectClass}>
-          <option value="">Any status</option>
-          {STATUSES.map((s) => <option key={s} value={s}>{s}</option>)}
-        </select>
+        <Select
+          value={genre}
+          onChange={setGenre}
+          placeholder="All genres"
+          className="sm:w-48"
+          options={[{ value: '', label: 'All genres' }, ...GENRES.map((g) => ({ value: g, label: g }))]}
+        />
+        <Select
+          value={status}
+          onChange={setStatus}
+          placeholder="Any status"
+          className="sm:w-44"
+          options={[{ value: '', label: 'Any status' }, ...STATUSES.map((s) => ({ value: s, label: s }))]}
+        />
       </div>
       {loading ? (
         <p className="py-16 text-center text-gray-400">Loading\u2026</p>
