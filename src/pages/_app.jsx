@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import dynamic from 'next/dynamic';
+import Head from 'next/head';
 import '@/styles/globals.css';
 import { useStore } from '@/store/useStore';
 import { getCurrentUser, onAuthChange, isGuest } from '@/lib/auth';
@@ -31,6 +32,10 @@ export default function App({ Component, pageProps }) {
 
   return (
     <div className="relative min-h-screen">
+      <Head>
+        <title>DONGHUNT</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <BackgroundVideo />
       <div className="relative z-10">
         {/* Navbar gating: only after the user is authenticated or a guest */}
