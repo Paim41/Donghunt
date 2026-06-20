@@ -60,7 +60,7 @@ export default function Watch() {
   }, [id, episodeNumber, saveProgress]);
 
   if (!anime || !currentEp) {
-    return <p className="pt-28 text-center text-gray-400">Loading\u2026</p>;
+    return <p className="pt-28 text-center text-gray-400">Loading</p>;
   }
 
   const servers = currentEp.servers || [];
