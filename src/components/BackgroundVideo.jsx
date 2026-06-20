@@ -3,7 +3,7 @@
 // gradient overlay the old static .app-bg used.
 export default function BackgroundVideo() {
   return (
-    <div className="fixed inset-0 -z-20 overflow-hidden bg-[#0b0f1a]">
+    <div className="fixed inset-0 z-0 overflow-hidden bg-[#0b0f1a]">
       <video
         className="h-full w-full object-cover"
         autoPlay
