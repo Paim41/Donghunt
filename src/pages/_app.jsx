@@ -30,11 +30,13 @@ export default function App({ Component, pageProps }) {
   }, [setUser, setGuest, setAuthReady]);
 
   return (
-    <div className="min-h-screen">
+    <div className="relative min-h-screen">
       <BackgroundVideo />
-      {/* Navbar gating: only after the user is authenticated or a guest */}
-      {authReady && authed && <Navbar />}
-      <Component {...pageProps} />
+      <div className="relative z-10">
+        {/* Navbar gating: only after the user is authenticated or a guest */}
+        {authReady && authed && <Navbar />}
+        <Component {...pageProps} />
+      </div>
     </div>
   );
 }
