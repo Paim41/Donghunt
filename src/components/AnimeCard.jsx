@@ -40,7 +40,7 @@ export default function AnimeCard({ anime, progressPct = 0 }) {
           isBookmarked ? 'bg-primary text-white' : 'bg-black/40 text-gray-200 hover:bg-black/60'
         }`}
       >
-        {isBookmarked ? '\u2605' : '\u2606'}
+        {isBookmarked ? '★' : '☆'}
       </button>
     </motion.div>
   );
