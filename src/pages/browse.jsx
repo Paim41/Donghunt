@@ -45,7 +45,7 @@ export default function Browse() {
       <h1 className="mb-6 font-heading text-3xl text-white">Browse</h1>
       <div className="mb-8 flex flex-col gap-3 sm:flex-row">
         <input
-          placeholder="Search titles\u2026"
+          placeholder="Search titles"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           className="flex-1 rounded-lg bg-black/30 px-4 py-2 text-white ring-1 ring-white/10 outline-none focus:ring-primary"
