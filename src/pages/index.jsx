@@ -37,7 +37,7 @@ export default function Home() {
   };
 
   if (!authReady) {
-    return <div className="flex min-h-screen items-center justify-center text-gray-400">Loading\u2026</div>;
+    return <div className="flex min-h-screen items-center justify-center text-gray-400">Loading</div>;
   }
 
   // --- Unauthenticated: landing/auth screen only ---
