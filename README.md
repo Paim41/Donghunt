@@ -1,101 +1,122 @@
-# Donghunt
+<div align="center">
 
-A modern anime / donghua **streaming + tracker** web app. Rebuilt from a single
-`donghunt.html` prototype into a production-ready, modular Next.js application with
-Supabase auth + database, Zustand state, and a premium dark glassmorphism UI.
+# 🎌 DongHunt
 
-> The original prototype is kept as `donghunt.html` for reference.
+**Your personal anime & donghua library — browse, track, and collect.**
+
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-6C5CE7?style=flat-square)](https://donghunt.vercel.app/)
+[![Next.js](https://img.shields.io/badge/Next.js-15-black?style=flat-square&logo=next.js)](https://nextjs.org/)
+[![Supabase](https://img.shields.io/badge/Supabase-Backend-3ECF8E?style=flat-square&logo=supabase)](https://supabase.com/)
+[![Deployed on Vercel](https://img.shields.io/badge/Vercel-Deployed-black?style=flat-square&logo=vercel)](https://vercel.com/)
+
+</div>
+
+---
+
+## Overview
+
+DongHunt is a modern web app for anime and donghua enthusiasts. Sign in, explore a curated library, save your favorites, and pick up where you left off — all backed by real-time data from Supabase.
+
+---
 
 ## Features
 
-- **Auth gating** \u2013 the navbar only appears after you log in or choose *Continue as Guest*.
-- **Supabase Auth** (email + password) and a **guest mode** (no login).
-- **Real data** fetched from Supabase (no mock-only data in components).
-- **Library** with responsive grid, debounced search, and genre/status filters.
-- **Anime detail** page (poster, synopsis, episode list).
-- **Video player** (React Player) with play/pause, seek, volume, **VTT subtitles**,
-  and **multi-server switching with no page reload**.
-- **Watch progress**: saved at most every 10s (throttled), with **auto-resume**.
-- **Bookmarks/Favorites**, **Continue Watching**, **Recently Updated**.
-- Framer Motion animations, lazy-loaded images, dynamic imports.
+- 🔐 **Authentication** — Secure sign-up and login via Supabase Auth
+- 📚 **Library browsing** — Explore anime and donghua titles in one place
+- ⭐ **Favorites** — Save and manage your personal watchlist
+- 👤 **Guest mode** — Browse without an account
+- ⚡ **Fast** — Built on Next.js with server-side rendering
 
-## Tech stack
+---
 
-Next.js (React) \u00b7 TailwindCSS \u00b7 Zustand \u00b7 Supabase \u00b7 React Player \u00b7 Framer Motion
+## Tech Stack
 
-## Project structure
+| Layer | Technology |
+|---|---|
+| Frontend | Next.js, React |
+| Auth & Database | Supabase |
+| Styling | Tailwind CSS |
+| Deployment | Vercel |
 
+---
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js 18+
+- A [Supabase](https://supabase.com/) project
+
+### 1. Clone the repo
+
+```bash
+git clone https://github.com/YOUR_USERNAME/donghuntdemo.git
+cd donghuntdemo
 ```
-src/
-  pages/        index, login, browse, anime/[id], watch/[id], _app, _document
-  components/   Navbar, AnimeCard, AnimeGrid, VideoPlayer, ServerSwitcher, ProgressBar
-  store/        useStore.js (Zustand)
-  lib/          supabaseClient.js, auth.js, api.js
-  styles/       globals.css
-supabase/
-  migrations/0001_init.sql
-  seed.sql
-```
 
-## Getting started
-
-### 1. Install
+### 2. Install dependencies
 
 ```bash
 npm install
 ```
 
-### 2. Create a Supabase project
+### 3. Configure environment variables
 
-1. Go to https://supabase.com and create a new project.
-2. Open **Project Settings \u2192 API** and copy the **Project URL** and **anon public key**.
+Create a `.env.local` file in the project root:
 
-### 3. Configure environment
-
-```bash
-cp .env.example .env.local
-```
-
-Fill in:
-
-```
-NEXT_PUBLIC_SUPABASE_URL=https://YOUR-PROJECT.supabase.co
-NEXT_PUBLIC_SUPABASE_ANON_KEY=YOUR-ANON-KEY
+```env
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
 ```
 
 ### 4. Set up the database
 
-In the Supabase dashboard **SQL Editor**, run:
+In your Supabase dashboard, open the **SQL Editor** and run these files in order:
 
-1. `supabase/migrations/0001_init.sql` \u2013 creates tables, RLS policies, and the
-   trigger that creates a profile row on sign-up.
-2. `supabase/seed.sql` \u2013 inserts an example catalog so the app shows real data.
+```
+supabase/migrations/0001_init.sql
+supabase/seed.sql
+```
 
-(Or use the Supabase CLI: `supabase db push` then run the seed.)
-
-### 5. Enable email auth
-
-In **Authentication \u2192 Providers**, ensure **Email** is enabled. For quick local
-testing you may disable "Confirm email".
-
-### 6. Run
+### 5. Run the dev server
 
 ```bash
 npm run dev
 ```
 
-Open http://localhost:3000. Log in, sign up, or continue as guest.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-## Database schema
+---
 
-- **users**: `id`, `email`, `created_at`
-- **anime**: `id`, `title`, `description`, `cover_image`, `genres`, `status`, `total_episodes`
-- **episodes**: `id`, `anime_id`, `episode_number`, `title`, `thumbnail`, `subtitles`, `servers` (`[{name,url}]`)
-- **watch_history**: `id`, `user_id`, `anime_id`, `last_watched_episode`, `resume_timestamp`, `is_completed`, `updated_at`
-- **bookmarks**: `user_id`, `anime_id`, `created_at`
+## Deployment
+
+This project deploys to Vercel in minutes:
+
+1. Push your repo to GitHub
+2. Import it at [vercel.com/new](https://vercel.com/new)
+3. Add your `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY` environment variables
+4. Click **Deploy**
+
+---
+
+## Roadmap
+
+- [ ] Search and filter by genre, year, or status
+- [ ] Episode progress tracking
+- [ ] User reviews and ratings
+- [ ] Improved mobile experience
+
+---
 
 ## Notes
 
-- Catalog tables are publicly readable so guests can browse; user data is protected by RLS.
-- Guest progress/bookmarks persist in `localStorage`; logged-in users sync to Supabase.
-- Replace the seed's sample video URLs with your own sources.
+- `.env.local` is intentionally excluded from version control — never commit your keys
+- Supabase Email Auth must be enabled in your project settings
+- Restart the dev server after any changes to `.env.local`
+
+
+---
+
+## License
+
+For educational purposes only.
