@@ -49,7 +49,7 @@ export default function AnimeDetail() {
             onClick={() => toggleBookmark(anime.id)}
             className="mt-5 rounded-xl glass px-5 py-2.5 text-sm text-white transition hover:bg-white/10"
           >
-            {isBookmarked ? '\u2605 Bookmarked' : '\u2606 Add to Favorites'}
+            {isBookmarked ? '★ Bookmarked' : '☆ Add to Favorites'}
           </button>
         </div>
       </div>
