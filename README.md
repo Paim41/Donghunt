@@ -31,12 +31,15 @@ DongHunt is a modern web app for anime and donghua enthusiasts. Sign in, explore
 
 ## Tech Stack
 
+<div align="center">
+  
 | Layer | Technology |
 |---|---|
 | Frontend | Next.js, React |
 | Auth & Database | Supabase |
 | Styling | Tailwind CSS |
 | Deployment | Vercel |
+</div>
 
 ---
 
